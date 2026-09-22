@@ -1,0 +1,55 @@
+name: Build debug APK
+
+on:
+  push:
+    branches:
+      - bewell-bw-sc6w-support
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 37
+        run: sdkmanager "platforms;android-37" "build-tools;37.0.0"
+
+      - name: Make Gradle wrapper executable
+        working-directory: android_app
+        run: chmod +x gradlew
+
+      - name: Run BW-SC6W tests
+        working-directory: android_app
+        run: ./gradlew --no-daemon :app:testDebugUnitTest --tests "*BewellConnectBWSC6WHandlerTest"
+
+      - name: Build debug APK
+        working-directory: android_app
+        run: ./gradlew --no-daemon :app:assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: openScale-BW-SC6W-debug
+          path: android_app/app/build/outputs/apk/debug/openScale-debug.apk
+          if-no-files-found: error
+          retention-days: 14
