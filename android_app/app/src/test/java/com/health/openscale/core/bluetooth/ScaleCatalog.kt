@@ -26,6 +26,7 @@ import com.health.openscale.core.bluetooth.scales.AndUC352BLEHandler
 import com.health.openscale.core.bluetooth.scales.AfuB1Handler
 import com.health.openscale.core.bluetooth.scales.BeurerBF450Handler
 import com.health.openscale.core.bluetooth.scales.BeurerSanitasHandler
+import com.health.openscale.core.bluetooth.scales.BewellConnectBWSC6WHandler
 import com.health.openscale.core.bluetooth.scales.BodyConnectHandler
 import com.health.openscale.core.bluetooth.scales.CultSmartScaleProHandler
 import com.health.openscale.core.bluetooth.scales.CustomOpenScaleHandler
@@ -235,6 +236,7 @@ object ScaleCatalog {
         device("SENSSUN FAT") claimedBy SenssunHandler::class.java,
         // No QN service advertised, so the QN driver must not take it.
         device("RENPHO-SCALE-1234") claimedBy RenphoHandler::class.java,
+        device("BW-SC6W", uuid16(0xFFE0)) claimedBy BewellConnectBWSC6WHandler::class.java,
         device("QN-Scale", uuid16(0xFFE0)) claimedBy QNHandler::class.java,
         device("Health Scale") claimedBy OneByoneHandler::class.java,
         device("eufy T9146") claimedBy OneByoneHandler::class.java,

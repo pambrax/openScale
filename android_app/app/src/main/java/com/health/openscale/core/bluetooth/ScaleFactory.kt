@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.health.openscale.core.bluetooth.scales.HealthKeep280Handler
 import com.health.openscale.core.bluetooth.scales.BeurerBF450Handler
+import com.health.openscale.core.bluetooth.scales.BewellConnectBWSC6WHandler
 import com.health.openscale.core.bluetooth.scales.ScaleDeviceHandler
 import com.health.openscale.core.bluetooth.scales.AAAxHandler
 import com.health.openscale.core.bluetooth.scales.AfuB1Handler
@@ -162,6 +163,7 @@ class ScaleFactory @Inject constructor(
             RenphoHandler(),
             AiLinkBroadcastHandler(),
             QNHandlerBroadcast(),
+            BewellConnectBWSC6WHandler(),
             QNHandler(),
             OneByoneHandler(),
             OneByoneNewHandler(),
